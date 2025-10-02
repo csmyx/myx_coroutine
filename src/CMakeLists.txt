@@ -1,0 +1,9 @@
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS *.cpp)
+target_sources(${LIB_NAME} PRIVATE ${sources})
+
+# set_target_properties(${LIB_NAME} PROPERTIES
+#     VERSION ${PROJECT_VERSION}
+#     SOVERSION ${PROJECT_VERSION_MAJOR}
+#     POSITION_INDEPENDENT_CODE ON
+# )
+
