@@ -31,3 +31,4 @@ target_link_libraries(${LIB_NAME}
 
 add_subdirectory(src)
 add_subdirectory(example)
+add_subdirectory(test)
