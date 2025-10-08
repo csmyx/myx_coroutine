@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "linux-default",
+            "displayName": "cmake config",
+            "description": "cmake config",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_TOOLCHAIN_FILE": "/home/hugo/vcpkg_dir/vcpkg/scripts/buildsystems/vcpkg.cmake",
+                "VCPKG_TARGET_TRIPLET": "x64-linux-libcxx"
+            }
+        }
+    ]
+}

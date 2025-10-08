@@ -10,6 +10,9 @@ set(LIB_NAME ${PROJECT_NAME})
 
 include(cmake/message.cmake)
 
+enable_testing()
+find_package(spdlog CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
 
 add_library(${LIB_NAME} STATIC)
 
@@ -25,7 +28,7 @@ target_include_directories(${LIB_NAME}
 # -l
 target_link_libraries(${LIB_NAME}
     PUBLIC
-
+        spdlog::spdlog
     PRIVATE
 )
 

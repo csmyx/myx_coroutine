@@ -6,7 +6,8 @@ BUILD_TYPE=Debug
 config:
 	cmake -B build -S . \
 	-DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
-	-DCMAKE_CXX_STANDARD=23
+	-DCMAKE_CXX_STANDARD=20 \
+	-DVCPKG_TARGET_TRIPLET=x64-linux-libcxx
 
 build: config
 	cmake --build build -j

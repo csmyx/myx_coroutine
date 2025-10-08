@@ -8,10 +8,10 @@
 
 namespace myx_coroutine {
 
-template<class T>
+template<typename T>
 class Generator;
 
-template<class T>
+template<typename T>
 struct GeneratorPromise {
     using value_type = std::remove_reference_t<T>;
 
@@ -36,7 +36,7 @@ struct GeneratorPromise {
     value_type value_;
 };
 
-template<class T = void>
+template<typename T = void>
 class Generator {
   public:
     using promise_type = GeneratorPromise<T>;

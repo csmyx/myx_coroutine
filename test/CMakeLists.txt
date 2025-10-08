@@ -1,8 +1,13 @@
-# for each "test/x.cpp", generate "x"
-file(GLOB_RECURSE all_tests *.cpp)
-foreach(test ${all_tests})
-    get_filename_component(target_name ${test} NAME_WE)
+set(MYX_COROUTINE_TEST ${LIB_NAME}_test)
 
-    add_executable(${target_name} ${test})
-    target_link_libraries(${target_name} PRIVATE ${LIB_NAME})
-endforeach()
+file(GLOB test_src "*.cpp")
+add_executable(${MYX_COROUTINE_TEST} ${test_src})
+target_link_libraries(${MYX_COROUTINE_TEST} 
+    PRIVATE 
+        ${LIB_NAME}
+        GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main
+)
+
+add_test(NAME run_myx_coroutine_test COMMAND ${MYX_COROUTINE_TEST})
+
+
