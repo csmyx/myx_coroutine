@@ -9,6 +9,8 @@ set(LIB_NAME ${PROJECT_NAME})
 # endif()
 
 include(cmake/message.cmake)
+include(cmake/check_tsan_support.cmake)
+check_tsan_support()
 
 enable_testing()
 find_package(spdlog CONFIG REQUIRED)

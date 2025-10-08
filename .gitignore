@@ -42,3 +42,4 @@
 
 cmake
 build
+build_gcc

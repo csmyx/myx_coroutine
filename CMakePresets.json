@@ -2,16 +2,43 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "linux-default",
-            "displayName": "cmake config",
-            "description": "cmake config",
+            "name": "linux-clang",
+            "displayName": "cmake config for clang",
+            "description": "",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "/home/hugo/vcpkg_dir/vcpkg/scripts/buildsystems/vcpkg.cmake",
                 "VCPKG_TARGET_TRIPLET": "x64-linux-libcxx"
+            }
+        },
+        {
+            "name": "linux-gcc",
+            "displayName": "cmake config for gcc",
+            "description": "",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build_gcc",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "/home/hugo/vcpkg_dir/vcpkg/scripts/buildsystems/vcpkg.cmake",
+                "VCPKG_TARGET_TRIPLET": "x64-linux"
+            }
+        },
+        {
+            "name": "Configure preset using toolchain file",
+            "displayName": "Configure preset using toolchain file",
+            "description": "Sets Ninja generator, build and install directory",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
             }
         }
     ]
