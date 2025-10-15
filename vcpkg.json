@@ -1,0 +1,10 @@
+{
+    "name": "myx-coroutine",
+    "version": "0.1.0",
+    "dependencies": [
+        "fmt",
+        "spdlog",
+        "asio",
+        "gtest"
+    ]
+}
