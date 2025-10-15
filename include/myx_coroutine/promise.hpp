@@ -92,11 +92,7 @@ class FutureState {
     void set_value(T &&value) {
         std::unique_lock lock(mtx_);
         assert(!is_ready());
-        if constexpr (std::is_lvalue_reference_v<T>) {
-            value_.template emplace<T>(value);
-        } else {
-            value_.template emplace<T>(std::move(value));
-        }
+        value_.template emplace<T>(std::forward<T>(value));
         cv_.notify_one();
     }
 
