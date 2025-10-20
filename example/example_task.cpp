@@ -11,15 +11,15 @@ int main() {
     auto task = f();
     task.resume();
     {
-        auto x = task.promise().result();
+        auto x = task.promise().get_result();
         std::println("hello {}", x);
     }
     {
-        auto x = std::move(task).promise().result();
+        auto x = std::move(task).promise().get_result();
         std::println("hello {}", x);
     }
     {
-        auto x = task.promise().result();
+        auto x = task.promise().get_result();
         std::println("hello {}", x);
     }
 }

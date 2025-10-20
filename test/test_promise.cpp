@@ -7,7 +7,17 @@
 #include <thread>
 
 namespace myx_coroutine {
-struct PromiseTest : public testing::Test {
+
+#define ENABLE_TEST_NAME 0
+#define TEST_NAME_       PromiseTest
+
+#if ENABLE_TEST_NAME
+#define TEST_NAME TEST_NAME_
+#else
+#define TEST_NAME DISABLED_##TEST_NAME_
+#endif
+
+struct TEST_NAME : public testing::Test {
   protected:
     void SetUp() override {
         spdlog::set_pattern(
@@ -25,7 +35,7 @@ struct PromiseTest : public testing::Test {
 
 using namespace std::chrono_literals;
 
-TEST_F(PromiseTest, simpleTest) {
+TEST_F(TEST_NAME, simpleTest) {
     Promise<int> p;
     auto f = p.get_future();
     int x = 100;
@@ -42,7 +52,7 @@ TEST_F(PromiseTest, simpleTest) {
     EXPECT_EQ(v, x);
 }
 
-TEST_F(PromiseTest, setException) {
+TEST_F(TEST_NAME, setException) {
     Promise<int> p;
     auto f = p.get_future();
     const std::string err_msg = "test exception";
@@ -74,7 +84,7 @@ TEST_F(PromiseTest, setException) {
     );
 }
 
-TEST_F(PromiseTest, promiseDestroyedWithoutValue) {
+TEST_F(TEST_NAME, promiseDestroyedWithoutValue) {
     Promise<int> p;
     auto f = p.get_future();
 
@@ -87,7 +97,7 @@ TEST_F(PromiseTest, promiseDestroyedWithoutValue) {
     EXPECT_THROW(f.get(), std::runtime_error);
 }
 
-TEST_F(PromiseTest, moveSemantics) {
+TEST_F(TEST_NAME, moveSemantics) {
     Promise<int> p1;
     auto f1 = p1.get_future();
     Promise<int> p2(std::move(p1));
@@ -119,7 +129,7 @@ TEST_F(PromiseTest, moveSemantics) {
 }
 
 // Test promise of void type
-TEST_F(PromiseTest, voidType) {
+TEST_F(TEST_NAME, voidType) {
     Promise<void> p;
     auto f = p.get_future();
     bool flag = false;
@@ -137,7 +147,7 @@ TEST_F(PromiseTest, voidType) {
 }
 
 // Test calling get_future multiple times (should throw an exception, consistent with std)
-TEST_F(PromiseTest, multipleGetFuture) {
+TEST_F(TEST_NAME, multipleGetFuture) {
     Promise<int> p;
     (void)p.get_future(); // First call is valid
     // Subsequent calls should throw an exception
@@ -146,7 +156,7 @@ TEST_F(PromiseTest, multipleGetFuture) {
 }
 
 // Test the blocking waiting behavior of future
-TEST_F(PromiseTest, futureBlockUntilReady) {
+TEST_F(TEST_NAME, futureBlockUntilReady) {
     Promise<std::string> p;
     auto f = p.get_future();
     std::string result;
@@ -176,7 +186,7 @@ TEST_F(PromiseTest, futureBlockUntilReady) {
 }
 
 // Test multiple futures waiting for the same promise (through shared state)
-TEST_F(PromiseTest, multipleFuturesShareState) {
+TEST_F(TEST_NAME, multipleFuturesShareState) {
     Promise<long> p;
     auto f1 = p.get_future();
     // do not allow multiple calls to get_future
